@@ -3,6 +3,8 @@ use std::env;
 use tempfile::NamedTempFile;
 use std::io::Write;
 
+// Ensure validation fails when required fields are missing.
+// Specifically, when `database.url` is absent the validator should return an error.
 #[test]
 fn validate_missing_database() {
     let partial = test_configuration_loader::partial::PartialConfig::default();
@@ -10,6 +12,8 @@ fn validate_missing_database() {
     assert!(res.is_err());
 }
 
+// Load a TOML file and verify merging order: file values are picked up,
+// but environment variables override configuration file values (env has higher precedence).
 #[test]
 fn load_from_toml_file_and_merge_env() {
     // Create a minimal TOML file with database URL and server port
