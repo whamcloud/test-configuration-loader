@@ -79,3 +79,20 @@ A link to the pull request can be submitted once it is ready for review.
 * Hot-reload support for configuration changes
 * Partial configuration validation
 * Schema or documentation generation
+
+## How to run
+
+Run tests and checks locally:
+
+```bash
+cargo fmt --all -- --check
+cargo clippy -- -D warnings
+cargo test -- --test-threads=1
+```
+
+Example run (requires `DC_DATABASE_URL` or a config file with `[database].url`):
+
+```bash
+DC_DATABASE_URL=postgres://localhost/demo cargo run --example basic
+```
+
